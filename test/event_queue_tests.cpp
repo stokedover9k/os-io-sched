@@ -54,16 +54,16 @@ TEST_F(EventQueueOrderTests, DifTimeDifPrio_OrderByTime)
   queue.pushEvent( &events[0][0] );                 // Q: 00
   queue.pushEvent( &events[2][2] );                 // Q: 00 22
   queue.pushEvent( &events[1][1] );                 // Q: 00 11 22
-  ASSERT_TRUE( &events[0][0] == queue.popEvent() );
-  ASSERT_TRUE( &events[1][1] == queue.popEvent() );
-  ASSERT_TRUE( &events[2][2] == queue.popEvent() );
+  ASSERT_EQ( &events[0][0], queue.popEvent() );
+  ASSERT_EQ( &events[1][1], queue.popEvent() );
+  ASSERT_EQ( &events[2][2], queue.popEvent() );
 
   queue.pushEvent( &events[0][2] );                 // Q: 02
   queue.pushEvent( &events[2][0] );                 // Q: 02 20
   queue.pushEvent( &events[1][1] );                 // Q: 02 11 20
-  ASSERT_TRUE( &events[0][2] == queue.popEvent() );
-  ASSERT_TRUE( &events[1][1] == queue.popEvent() );
-  ASSERT_TRUE( &events[2][0] == queue.popEvent() );
+  ASSERT_EQ( &events[0][2], queue.popEvent() );
+  ASSERT_EQ( &events[1][1], queue.popEvent() );
+  ASSERT_EQ( &events[2][0], queue.popEvent() );
 }
 
 TEST_F(EventQueueOrderTests, DifTimeSamePrio_OrderByTime)
@@ -71,9 +71,9 @@ TEST_F(EventQueueOrderTests, DifTimeSamePrio_OrderByTime)
   queue.pushEvent( &events[0][0] );
   queue.pushEvent( &events[2][0] );
   queue.pushEvent( &events[1][0] );
-  ASSERT_TRUE( &events[0][0] == queue.popEvent() );
-  ASSERT_TRUE( &events[1][0] == queue.popEvent() );
-  ASSERT_TRUE( &events[2][0] == queue.popEvent() );
+  ASSERT_EQ( &events[0][0], queue.popEvent() );
+  ASSERT_EQ( &events[1][0], queue.popEvent() );
+  ASSERT_EQ( &events[2][0], queue.popEvent() );
 }
 
 TEST_F(EventQueueOrderTests, SameTimeDifPrio_OrderByPrio)
@@ -81,7 +81,25 @@ TEST_F(EventQueueOrderTests, SameTimeDifPrio_OrderByPrio)
   queue.pushEvent( &events[0][0] );  // 00
   queue.pushEvent( &events[0][2] );  // 00 02
   queue.pushEvent( &events[0][1] );  // 00 01 02
-  ASSERT_TRUE( &events[0][0] == queue.popEvent() );
-  ASSERT_TRUE( &events[0][1] == queue.popEvent() );
-  ASSERT_TRUE( &events[0][2] == queue.popEvent() );
+  ASSERT_EQ( &events[0][0], queue.popEvent() );
+  ASSERT_EQ( &events[0][1], queue.popEvent() );
+  ASSERT_EQ( &events[0][2], queue.popEvent() );
+}
+
+TEST_F(EventQueueOrderTests, SameTimeSamePrio_OrderByArrival)
+{
+  PriorityEvent e1(1, 0);  // out of order, to ensure that
+  PriorityEvent e3(1, 0);  // address does not play a role
+  PriorityEvent e2(1, 0);
+
+  queue.pushEvent( &events[0][0] );
+  queue.pushEvent( &events[2][0] );
+  queue.pushEvent( &e1 );
+  queue.pushEvent( &e2 );
+  queue.pushEvent( &e3 );
+  ASSERT_EQ( &events[0][0], queue.popEvent() );
+  ASSERT_EQ( &e1, queue.popEvent() );
+  ASSERT_EQ( &e2, queue.popEvent() );
+  ASSERT_EQ( &e3, queue.popEvent() );
+  ASSERT_EQ( &events[2][0], queue.popEvent() );
 }
