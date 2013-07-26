@@ -30,7 +30,7 @@ add_subdirectory(${EXT_PROJECTS_DIR}/gtest)
 #-------------------
 # Main App
 #-------------------
-set(PROJECT_APP_NAME ${PROJECT_NAME_STR}_app)
+set(PROJECT_APP_NAME ${PROJECT_NAME_STR})
 include_directories(${COMMON_INCLUDES})
 file(GLOB APP_SRC_FILES ${PROJECT_SOURCE_DIR}/app/*.cpp)
 
