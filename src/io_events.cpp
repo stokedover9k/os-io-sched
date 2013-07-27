@@ -2,7 +2,7 @@
 #include "output.h"
 #include <iomanip>
 
-namespace des
+namespace iosim
 	{
 	void outputEvent(IOEvent * e, char const * eventType)
 		{
@@ -31,6 +31,12 @@ namespace des
 		outputEvent(this, "add");
 		}
 
+	std::function<bool(void)> & IORequest::isDiskIdleChecker()
+		{
+		static std::function<bool(void)> _idleDiskChecker;
+		return _idleDiskChecker;
+		}
+
 	IOBegin::IOBegin(unsigned int time, unsigned int sector) :
 			IOEvent(time, sector)
 		{
@@ -49,6 +55,21 @@ namespace des
 	void IOComplete::execute()
 		{
 		outputEvent(this, "finish");
+		}
+
+	std::function<bool(void)> & IOComplete::isIORequestPendingChecker()
+		{
+		static std::function<bool(void)> _pendingRequestChecker;
+		return _pendingRequestChecker;
+		}
+
+	IODispatch::IODispatch(unsigned int time) :
+			Event(time)
+		{
+		}
+
+	void IODispatch::execute()
+		{
 		}
 
 	}

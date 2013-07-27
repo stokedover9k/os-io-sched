@@ -3,8 +3,10 @@ set(PROJECT_NAME_STR iosched)
 project(${PROJECT_NAME_STR} C CXX)
 
 if(CMAKE_COMPILER_IS_GNUCXX)
-	add_definitions(-Wall -ansi -Wno-deprecated -pthread)
+	add_definitions(-Wall -ansi -Wno-deprecated -pthread -std=c++0x)
 endif()
+
+#set(CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS} "-std=c++0x")
 
 if(MSVC)
 #vc 2012 fix for vararg templates

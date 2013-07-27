@@ -53,7 +53,7 @@ int main(int argc, char *argv[])
 
     while( infile >> time >> track_accessed )
     {
-    	eventQueue.pushEvent( new des::IORequest(time, track_accessed) );
+    	eventQueue.pushEvent( new iosim::IORequest(time, track_accessed) );
 
       while( infile.peek() == '#' )
         std::getline(infile, line);
