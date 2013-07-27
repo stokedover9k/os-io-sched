@@ -9,6 +9,7 @@ namespace des
 	struct IOEvent: public Event
 		{
 		IOEvent(unsigned int time, unsigned int sector);
+		unsigned int getSector() const;
 
 	private:
 		unsigned int _sector;

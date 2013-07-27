@@ -12,6 +12,9 @@
 #define __MAIN_IO_SCHED__
 #include "Main.h"
 
+#include "io_events.h"
+#include "event_queue.h"
+
 //================== MAIN =====================//
 
 int main(int argc, char *argv[])
@@ -34,7 +37,13 @@ int main(int argc, char *argv[])
     exit(2);
   }
 
-  //----------- run simulation ---------------//
+  //----------- set up components ---------------//
+  // ...
+  // TODO: set up components
+  // ...
+
+  //----------- initialize simulation ---------------//
+  des::EventQueue eventQueue;
   {
     string line;
     int time, track_accessed;
@@ -44,12 +53,20 @@ int main(int argc, char *argv[])
 
     while( infile >> time >> track_accessed )
     {
-      ////////////////////
-      //  SIMULATION... //
-      ////////////////////
+    	eventQueue.pushEvent( new des::IORequest(time, track_accessed) );
 
       while( infile.peek() == '#' )
         std::getline(infile, line);
     }
+  }
+
+  //----------- run simulation ---------------//
+  {
+		while( eventQueue.size() )
+			{
+			des::Event * e = eventQueue.popEvent();
+			e->execute();
+			delete e;
+			}
   }
 }
