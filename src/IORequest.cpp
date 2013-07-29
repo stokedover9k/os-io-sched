@@ -12,7 +12,7 @@ namespace iosim
 	void IORequest::execute()
 		{
 
-		enqueueIORequest( getSectorAccess()->getSector() );
+		enqueueIORequest( getSectorAccess() );
 
 		if( isDiskIdle() )
   		{

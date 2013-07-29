@@ -62,7 +62,7 @@ struct IOEventExecute_EventCallbackBehavior_tests: public ::testing::Test
 		}
 
 	std::function<void(des::Event*)> dispatchFollowUpEvent;
-	std::function<void(unsigned int)> enqueueIORequest;
+	std::function<void(IOAccess*)> enqueueIORequest;
 	std::function<IOAccess *(void)> getNextSectorAccess;
 	std::function<bool(void)> isDiskIdle;
 	std::function<unsigned int(unsigned int)> accessSectorOnDisk;
@@ -95,7 +95,7 @@ struct IOEventExecute_EventCallbackBehavior_tests: public ::testing::Test
 		{
 		call(FOLLOW_UP);
 		}
-	static void enqueueCheck(unsigned int s)
+	static void enqueueCheck(IOAccess * s)
 		{
 		call(ENQUEUE_REQ);
 		}

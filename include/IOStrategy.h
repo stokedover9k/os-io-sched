@@ -10,6 +10,7 @@ namespace iosim
 		virtual ~IOStrategy();
 		virtual void addIOAccessRequest(IOAccess *access) = 0;
 		virtual IOAccess * getNextIOAccessRequest() = 0;
+    virtual unsigned int pendingRequestCount() const = 0;
 		};
 
 	}

@@ -15,7 +15,7 @@ namespace iosim
 		unsigned int getSector() const;
 
 		static std::function<void(Event*)> dispatchFollowUpEvent;
-		static std::function<void(unsigned int)> enqueueIORequest;
+		static std::function<void(IOAccess*)> enqueueIORequest;
 		static std::function<IOAccess *(void)> getNextSectorAccess;
 		static std::function<bool(void)> isDiskIdle;
 		static std::function<unsigned int(unsigned int)> accessSectorOnDisk;

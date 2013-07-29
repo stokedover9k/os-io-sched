@@ -4,7 +4,7 @@ namespace iosim
 	{
 
 	std::function<void(des::Event*)>          IOEvent::dispatchFollowUpEvent;
-	std::function<void(unsigned int)>         IOEvent::enqueueIORequest;
+	std::function<void(IOAccess*)>         IOEvent::enqueueIORequest;
 	std::function<IOAccess *(void)>           IOEvent::getNextSectorAccess;
 	std::function<bool(void)>                 IOEvent::isDiskIdle;
 	std::function<unsigned int(unsigned int)> IOEvent::accessSectorOnDisk;

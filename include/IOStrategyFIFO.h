@@ -17,6 +17,9 @@ namespace iosim
 
 		IOAccess* getNextIOAccessRequest();
 
+		virtual unsigned int pendingRequestCount() const;
+
+
 		private:
 			std::list<IOAccess *> queue;
 		};

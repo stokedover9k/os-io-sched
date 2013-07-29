@@ -13,6 +13,10 @@
 #include "IORequest.h"
 #include "EventQueue.h"
 #include "Event.h"
+#include "Disk.h"
+#include "IOStrategy.h"
+#include "IOStrategyFIFO.h"
+#include "IOSimAdaptors.h"
 
 #define __MAIN_IO_SCHED__
 #include "Main.h"
@@ -40,9 +44,23 @@ int main(int argc, char *argv[])
   }
 
   //----------- set up components ---------------//
-  // ...
-  // TODO: set up components
-  // ...
+  des::EventQueue eventQueue;
+  iosim::Disk disk;
+  iosim::IOStrategy * strategy;
+  {
+		strategy = new iosim::IOStrategyFIFO();
+	  // ...
+	  // TODO: set up components
+	  // ...
+
+		iosim::IOEvent::dispatchFollowUpEvent = iosim::EventDispatcher(&eventQueue);
+		iosim::IOEvent::enqueueIORequest = iosim::EnqueueSectorRequest(strategy);
+		iosim::IOEvent::getNextSectorAccess = iosim::NextSectorRequest(strategy);
+		iosim::IOEvent::isDiskIdle = iosim::DiskIdle(&disk);
+		iosim::IOEvent::setDiskToIdle = iosim::DiskSetIdle(&disk);
+		iosim::IOEvent::accessSectorOnDisk = iosim::AccessSector(&disk);
+		iosim::IOEvent::isIORequestPending = iosim::RequestPending(strategy);
+  }
 
   //----------- initialize access request list ---------------//
   std::list<iosim::IOAccess> accessList;
@@ -57,14 +75,15 @@ int main(int argc, char *argv[])
     {
       accessList.push_back( iosim::IOAccess(time, track_accessed) );
 
+      // ...
+      // TODO: set up components
+      // ...
       while( infile.peek() == '#' )
         std::getline(infile, line);
     }
   }
 
   //----------- initialize simulation ------------//
-  des::EventQueue eventQueue;
-
   for(auto access = accessList.begin(); access != accessList.end(); ++access)
     eventQueue.pushEvent( new iosim::IORequest( &*access ) );
 

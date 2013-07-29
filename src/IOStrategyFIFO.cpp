@@ -1,10 +1,3 @@
-/*
- * IOStrategyFIFO.cpp
- *
- *  Created on: Jul 29, 2013
- *      Author: yuriy
- */
-
 #include "IOStrategyFIFO.h"
 
 namespace iosim
@@ -26,4 +19,8 @@ namespace iosim
 		return a;
 		}
 
-	} /* namespace iosim */
+	unsigned int IOStrategyFIFO::pendingRequestCount() const
+		{
+		return queue.size();
+		}
+	}
