@@ -1,4 +1,5 @@
 #include <libio.h>
+#include <list>
 #include <cstddef>
 #include <cstdlib>
 #include <iostream>
@@ -8,6 +9,10 @@
 #include <string>
 
 #include "output.h"
+#include "IOAccess.h"
+#include "IORequest.h"
+#include "EventQueue.h"
+#include "Event.h"
 
 #define __MAIN_IO_SCHED__
 #include "Main.h"
@@ -39,8 +44,8 @@ int main(int argc, char *argv[])
   // TODO: set up components
   // ...
 
-  //----------- initialize simulation ---------------//
-  //des::EventQueue eventQueue;
+  //----------- initialize access request list ---------------//
+  std::list<iosim::IOAccess> accessList;
   {
     string line;
     int time, track_accessed;
@@ -50,17 +55,20 @@ int main(int argc, char *argv[])
 
     while( infile >> time >> track_accessed )
     {
-      // ...
-      // TODO: initialize simulation
-      // ...
+      accessList.push_back( iosim::IOAccess(time, track_accessed) );
 
       while( infile.peek() == '#' )
         std::getline(infile, line);
     }
   }
 
+  //----------- initialize simulation ------------//
+  des::EventQueue eventQueue;
+
+  for(auto access = accessList.begin(); access != accessList.end(); ++access)
+    eventQueue.pushEvent( new iosim::IORequest( &*access ) );
+
   //----------- run simulation ---------------//
-  /*
   {
 		while( eventQueue.size() )
 			{
@@ -69,5 +77,4 @@ int main(int argc, char *argv[])
 			delete e;
 			}
   }
-  */
 }
