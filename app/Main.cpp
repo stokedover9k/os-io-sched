@@ -72,9 +72,6 @@ int main(int argc, char *argv[])
     {
       accessList.push_back( iosim::IOAccess(time, track_accessed) );
 
-      // ...
-      // TODO: set up components
-      // ...
       while( infile.peek() == '#' )
         std::getline(infile, line);
     }
