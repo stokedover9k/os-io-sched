@@ -49,9 +49,6 @@ int main(int argc, char *argv[])
   iosim::IOStrategy * strategy;
   {
 		strategy = new iosim::IOStrategyFIFO();
-	  // ...
-	  // TODO: set up components
-	  // ...
 
 		iosim::IOEvent::dispatchFollowUpEvent = iosim::EventDispatcher(&eventQueue);
 		iosim::IOEvent::enqueueIORequest = iosim::EnqueueSectorRequest(strategy);
