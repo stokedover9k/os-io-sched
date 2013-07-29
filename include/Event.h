@@ -6,16 +6,11 @@ namespace des
 
   struct Event
   {
-    Event(unsigned int time);
     virtual ~Event();
 
     virtual void execute() = 0;
-
-    unsigned int getTime() const;
-    virtual int getPriority() const;
-
-  private:
-    unsigned int _time;
+		virtual unsigned int getTime() const = 0;
+		virtual int getPriority() const = 0;
   };
 
 };

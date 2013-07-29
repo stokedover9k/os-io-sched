@@ -12,9 +12,6 @@
 #define __MAIN_IO_SCHED__
 #include "Main.h"
 
-#include "io_events.h"
-#include "event_queue.h"
-
 //================== MAIN =====================//
 
 int main(int argc, char *argv[])
@@ -43,7 +40,7 @@ int main(int argc, char *argv[])
   // ...
 
   //----------- initialize simulation ---------------//
-  des::EventQueue eventQueue;
+  //des::EventQueue eventQueue;
   {
     string line;
     int time, track_accessed;
@@ -53,7 +50,9 @@ int main(int argc, char *argv[])
 
     while( infile >> time >> track_accessed )
     {
-    	eventQueue.pushEvent( new iosim::IORequest(time, track_accessed) );
+      // ...
+      // TODO: initialize simulation
+      // ...
 
       while( infile.peek() == '#' )
         std::getline(infile, line);
@@ -61,6 +60,7 @@ int main(int argc, char *argv[])
   }
 
   //----------- run simulation ---------------//
+  /*
   {
 		while( eventQueue.size() )
 			{
@@ -69,4 +69,5 @@ int main(int argc, char *argv[])
 			delete e;
 			}
   }
+  */
 }
