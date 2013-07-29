@@ -17,6 +17,8 @@ namespace iosim
 
 		virtual int getPriority() const;
 
+	protected:
+		virtual void printTrace() const;
 		};
 
 	}

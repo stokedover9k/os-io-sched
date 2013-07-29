@@ -17,7 +17,7 @@ struct IOEventExecute_EventCallbackBehavior_tests: public ::testing::Test
 	{
 
 	IOEventExecute_EventCallbackBehavior_tests() :
-			access1234(1, 2)
+			access1234(3, 2, 1)
 		{
 		access1234.setBeginTime(3);
 		access1234.setCompleteTime(4);

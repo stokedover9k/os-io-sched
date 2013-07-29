@@ -11,6 +11,8 @@ namespace iosim
 
 	void IOBegin::execute()
 		{
+		printTrace();
+
 		unsigned int accessTime = accessSectorOnDisk(getSectorAccess()->getSector());
 		getSectorAccess()->setCompleteTime( getTime() + accessTime );
 		dispatchFollowUpEvent( new IOComplete(getSectorAccess()) );

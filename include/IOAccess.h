@@ -6,7 +6,7 @@ namespace iosim
 
 	struct IOAccess
 		{
-		IOAccess(unsigned int requestTime, unsigned int sector);
+		IOAccess(unsigned int id, unsigned int sector, unsigned int requestTime);
 
 		unsigned int getRequestTime() const;
 
@@ -18,8 +18,10 @@ namespace iosim
 
 		unsigned int getSector() const;
 
+		unsigned int getId() const;
+
 	private:
-		unsigned int _requestTime, _beginTime, _completeTime, _sector;
+		unsigned int _requestTime, _beginTime, _completeTime, _sector, _id;
 		};
 
 	}

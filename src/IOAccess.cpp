@@ -3,8 +3,8 @@
 namespace iosim
 	{
 
-	IOAccess::IOAccess(unsigned int requestTime, unsigned int sector) :
-			_requestTime(requestTime), _beginTime(0), _completeTime(0), _sector(
+	IOAccess::IOAccess(unsigned int id, unsigned int sector, unsigned int requestTime) :
+			_id(id), _requestTime(requestTime), _beginTime(0), _completeTime(0), _sector(
 					sector)
 		{
 		}
@@ -37,6 +37,11 @@ namespace iosim
 	unsigned int IOAccess::getSector() const
 		{
 		return _sector;
+		}
+
+	unsigned int IOAccess::getId() const
+		{
+		return _id;
 		}
 
 	}

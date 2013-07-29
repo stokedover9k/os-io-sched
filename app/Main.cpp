@@ -70,7 +70,7 @@ int main(int argc, char *argv[])
 
     while( infile >> time >> track_accessed )
     {
-      accessList.push_back( iosim::IOAccess(time, track_accessed) );
+      accessList.push_back( iosim::IOAccess(accessList.size(), track_accessed, time) );
 
       while( infile.peek() == '#' )
         std::getline(infile, line);
@@ -83,6 +83,7 @@ int main(int argc, char *argv[])
 
   //----------- run simulation ---------------//
   {
+  	OUT(TRACE) << "TRACE";
 		while( eventQueue.size() )
 			{
 			des::Event * e = eventQueue.popEvent();

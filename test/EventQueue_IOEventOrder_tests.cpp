@@ -74,7 +74,7 @@ struct EventQueue_IOEventOrder_tests: public ::testing::Test
 
 	static IOAccess makeAccessWithEqualTimes(unsigned int time)
 		{
-		IOAccess a(time, 0);
+		IOAccess a(0, 0, time);
 		a.setBeginTime(time);
 		a.setCompleteTime(time);
 		return a;

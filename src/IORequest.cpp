@@ -11,6 +11,7 @@ namespace iosim
 
 	void IORequest::execute()
 		{
+		printTrace();
 
 		enqueueIORequest( getSectorAccess() );
 

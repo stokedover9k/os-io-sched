@@ -24,6 +24,7 @@ namespace iosim
 
 	protected:
 		IOAccess * getSectorAccess() const { return _sectorAccess; }
+		virtual void printTrace() const;
 
 	private:
 		IOAccess * _sectorAccess;

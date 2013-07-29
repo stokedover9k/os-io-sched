@@ -4,22 +4,24 @@
 #include "IOEvent.h"
 
 namespace iosim
-  {
+	{
 
-  struct IOComplete: public IOEvent
-    {
+	struct IOComplete: public IOEvent
+		{
 
-    IOComplete(IOAccess* sectorAccess);
+		IOComplete(IOAccess* sectorAccess);
 
-    virtual void execute();  // TODO:
+		virtual void execute();  // TODO:
 
-    virtual unsigned int getTime() const;
+		virtual unsigned int getTime() const;
 
-    virtual int getPriority() const;
+		virtual int getPriority() const;
 
-    };
+	protected:
+		virtual void printTrace() const;
+		};
 
-  }
+	}
 ;
 
 #endif //__IO_COMPLETE_H__

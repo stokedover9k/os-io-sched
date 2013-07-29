@@ -11,6 +11,8 @@ namespace iosim
 
   void IOComplete::execute()
     {
+  	printTrace();
+
     setDiskToIdle();
 
     if( isIORequestPending() )
