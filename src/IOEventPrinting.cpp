@@ -23,9 +23,9 @@ namespace iosim
 	void IOBegin::printTrace() const
 	{
 		OUT(TRACE) << getTime() << ": "
-		<< std::setw(5) << getSectorAccess()->getId()
-		<< " issue " << getSectorAccess()->getSector()
-		<< ' ' << diskHeadAtSector();
+				<< std::setw(5) << getSectorAccess()->getId()
+		    << " issue " << getSectorAccess()->getSector()
+		    << ' ' << diskHeadAtSector();
 	}
 
 	void IOComplete::printTrace() const
