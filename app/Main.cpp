@@ -91,4 +91,15 @@ int main(int argc, char *argv[])
 			delete e;
 			}
   }
+
+  //----------- print IO Requests summary ----------//
+  if( OutFilePrinter::ReportingMode() && TRACE )
+  {
+  	OUT(TRACE) << "IOREQS INFO";
+  	for( auto a = accessList.begin(); a != accessList.end(); a++ )
+  		OUT(TRACE) << std::setw(5) << a->getId() << ": "
+  			<< std::setw(5) << a->getRequestTime() << ' '
+  			<< std::setw(5) << a->getBeginTime() << ' '
+  			<< std::setw(5) << a->getCompleteTime();
+  }
 }
