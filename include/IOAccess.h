@@ -21,7 +21,7 @@ namespace iosim
 		unsigned int getId() const;
 
 	private:
-		unsigned int _requestTime, _beginTime, _completeTime, _sector, _id;
+		unsigned int _id, _sector, _requestTime, _beginTime, _completeTime;
 		};
 
 	}

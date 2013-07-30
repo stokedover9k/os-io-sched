@@ -4,8 +4,7 @@ namespace iosim
 	{
 
 	IOAccess::IOAccess(unsigned int id, unsigned int sector, unsigned int requestTime) :
-			_id(id), _requestTime(requestTime), _beginTime(0), _completeTime(0), _sector(
-					sector)
+			_id(id), _sector(sector), _requestTime(requestTime), _beginTime(0), _completeTime(0)
 		{
 		}
 
