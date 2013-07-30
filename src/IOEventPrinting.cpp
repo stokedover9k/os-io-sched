@@ -25,7 +25,7 @@ namespace iosim
 		OUT(TRACE) << getTime() << ": "
 		<< std::setw(5) << getSectorAccess()->getId()
 		<< " issue " << getSectorAccess()->getSector()
-		<< ' ' << (getTime() - getSectorAccess()->getRequestTime());
+		<< ' ' << diskHeadAtSector();
 	}
 
 	void IOComplete::printTrace() const

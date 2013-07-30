@@ -14,10 +14,14 @@ namespace iosim
 
 		bool isIdle() const;
 		void setIdle();
+		unsigned long getTotalHeadMovement() const;
+
+		unsigned int getCurrentSector() const;
 
 	private:
 		bool _idle;
 		unsigned int _headAtSector;
+		unsigned long _totalHeadMovement;
 		};
 
 	}

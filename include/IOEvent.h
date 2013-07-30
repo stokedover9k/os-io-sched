@@ -21,6 +21,7 @@ namespace iosim
 		static std::function<unsigned int(unsigned int)> accessSectorOnDisk;
 		static std::function<bool(void)> isIORequestPending;
 		static std::function<void(void)> setDiskToIdle;
+		static std::function<unsigned int(void)> diskHeadAtSector;
 
 	protected:
 		IOAccess * getSectorAccess() const { return _sectorAccess; }

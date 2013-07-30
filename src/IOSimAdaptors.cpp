@@ -76,4 +76,14 @@ namespace iosim
 		return _strategy->pendingRequestCount() != 0;
 		}
 
+	DiskHeadAtSector::DiskHeadAtSector(Disk* disk) :
+			_disk(disk)
+		{
+		}
+
+	unsigned int DiskHeadAtSector::operator ()()
+		{
+		return _disk->getCurrentSector();
+		}
+
 	}

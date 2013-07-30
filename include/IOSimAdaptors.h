@@ -87,6 +87,15 @@ namespace iosim
 		IOStrategy * _strategy;
 		};
 
+	struct DiskHeadAtSector
+		{
+		DiskHeadAtSector(Disk* disk);
+
+		unsigned int operator ()();
+	private:
+		Disk * _disk;
+		};
+
 	}
 ;
 

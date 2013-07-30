@@ -4,7 +4,7 @@ namespace iosim
 	{
 
 	Disk::Disk() :
-			_idle(true), _headAtSector(0)
+			_idle(true), _headAtSector(0), _totalHeadMovement(0)
 		{
 		}
 
@@ -14,7 +14,9 @@ namespace iosim
 		unsigned int dif = std::max(_headAtSector, sector)
 				- std::min(_headAtSector, sector);
 		_headAtSector = sector;
-		return dif;
+		_totalHeadMovement += dif;
+
+		return dif;  // really, return timeToScan(dif); but 1:1
 		}
 
 	bool Disk::isIdle() const
@@ -25,6 +27,16 @@ namespace iosim
 	void Disk::setIdle()
 		{
 		_idle = true;
+		}
+
+	unsigned long Disk::getTotalHeadMovement() const
+		{
+		return _totalHeadMovement;
+		}
+
+	unsigned int Disk::getCurrentSector() const
+		{
+		return _headAtSector;
 		}
 
 	}

@@ -57,6 +57,7 @@ int main(int argc, char *argv[])
 		iosim::IOEvent::setDiskToIdle = iosim::DiskSetIdle(&disk);
 		iosim::IOEvent::accessSectorOnDisk = iosim::AccessSector(&disk);
 		iosim::IOEvent::isIORequestPending = iosim::RequestPending(strategy);
+		iosim::IOEvent::diskHeadAtSector = iosim::DiskHeadAtSector(&disk);
   }
 
   //----------- initialize access request list ---------------//
@@ -92,14 +93,37 @@ int main(int argc, char *argv[])
 			}
   }
 
-  //----------- print IO Requests summary ----------//
-  if( OutFilePrinter::ReportingMode() && TRACE )
-  {
-  	OUT(TRACE) << "IOREQS INFO";
-  	for( auto a = accessList.begin(); a != accessList.end(); a++ )
-  		OUT(TRACE) << std::setw(5) << a->getId() << ": "
-  			<< std::setw(5) << a->getRequestTime() << ' '
-  			<< std::setw(5) << a->getBeginTime() << ' '
-  			<< std::setw(5) << a->getCompleteTime();
-  }
+  //----------- collect IO statistics and print IO Requests summary ----------//
+	OUT(TRACE) << "IOREQS INFO";
+	{
+		unsigned int total_time = 0;
+		unsigned long total_turnaround = 0;
+		unsigned long total_wait = 0;
+		unsigned int max_wait = 0;
+		unsigned long total_movement = disk.getTotalHeadMovement();
+
+		for( auto a = accessList.begin(); a != accessList.end(); a++ )
+		{
+			OUT(TRACE) << std::setw(5) << a->getId() << ": "
+								 << std::setw(5) << a->getRequestTime() << ' '
+								 << std::setw(5) << a->getBeginTime() << ' '
+								 << std::setw(5) << a->getCompleteTime();
+
+			total_time = std::max( a->getCompleteTime(), total_time );
+			total_turnaround += a->getCompleteTime() - a->getRequestTime();
+			total_wait += a->getBeginTime() - a->getRequestTime();
+			max_wait = std::max( a->getBeginTime() - a->getRequestTime(), max_wait );
+		}
+
+		double avg_turnaround = static_cast<double>(total_turnaround) / accessList.size();
+		double avg_wait = static_cast<double>(total_wait) / accessList.size();
+
+		OUT(SUMMARY) << std::fixed << std::setprecision(2)
+		             << "SUM: "
+				         << total_time + 1 << ' '
+				         << total_movement << ' '
+				         << avg_turnaround << ' '
+				         << avg_wait << ' '
+				         << max_wait;
+	}
 }
