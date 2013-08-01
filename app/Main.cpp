@@ -17,6 +17,7 @@
 #include "IOStrategy.h"
 #include "IOStrategyFIFO.h"
 #include "IOStrategySSTF.h"
+#include "IOStrategyCSCAN.h"
 #include "IOSimAdaptors.h"
 
 #define __MAIN_IO_SCHED__
@@ -53,6 +54,7 @@ int main(int argc, char *argv[])
 			{
 		case 'f':  strategy = new iosim::IOStrategyFIFO();   break;
 		case 's':  strategy = new iosim::IOStrategySSTF(0);  break;
+    case 'C':  strategy = new iosim::IOStrategyCSCAN();  break;
 		default:
 			cerr << "Error: unknown scheduling algorithm requested - " << PARAMS::schedalgo << ".\n";
 			exit(3);
