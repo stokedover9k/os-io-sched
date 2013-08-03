@@ -13,7 +13,7 @@ namespace iosim
 
 		virtual void advanceHead();
 
-	private:
+	protected:
 		bool forward;
 		};
 

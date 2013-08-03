@@ -19,6 +19,7 @@
 #include "IOStrategySSTF.h"
 #include "IOStrategySCAN.h"
 #include "IOStrategyCSCAN.h"
+#include "IOStrategyFSCAN.h"
 #include "IOSimAdaptors.h"
 
 #define __MAIN_IO_SCHED__
@@ -57,6 +58,7 @@ int main(int argc, char *argv[])
 		case 's':  strategy = new iosim::IOStrategySSTF(0);  break;
     case 'S':  strategy = new iosim::IOStrategySCAN();   break;
     case 'C':  strategy = new iosim::IOStrategyCSCAN();  break;
+    case 'F':  strategy = new iosim::IOStrategyFSCAN();  break;
 		default:
 			cerr << "Error: unknown scheduling algorithm requested - " << PARAMS::schedalgo << ".\n";
 			exit(3);

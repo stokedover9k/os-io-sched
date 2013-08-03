@@ -22,13 +22,7 @@ namespace iosim
 		else if (_currentHead->second.empty())
 			{
 			CSCANQueue::iterator p = _currentHead;
-			/*
-			_currentHead++;
-			if (_currentHead == _queue.end())  // if reached end
-				_currentHead = _queue.begin();
-			*/
 			advanceHead();
-
 			_queue.erase(p);
 			}
 
