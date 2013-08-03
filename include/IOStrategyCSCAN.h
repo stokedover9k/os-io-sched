@@ -19,12 +19,16 @@ namespace iosim
 
 		virtual unsigned int pendingRequestCount() const;
 
-	private:
+	protected:
 		typedef unsigned int SectorKey;
 		typedef std::list<IOAccess*> CSCANBucket;
 		typedef std::map<SectorKey, CSCANBucket> CSCANQueue;
 
+		virtual void advanceHead();
+
+	private:
 		unsigned int _pending;
+	protected:
 		CSCANQueue _queue;
 		CSCANQueue::iterator _currentHead;
 		};

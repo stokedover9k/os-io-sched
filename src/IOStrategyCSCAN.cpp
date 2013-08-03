@@ -5,7 +5,7 @@ namespace iosim
 	{
 
 	IOStrategyCSCAN::IOStrategyCSCAN() :
-			_pending(0), _currentHead(_queue.end())
+			_pending(0), _currentHead(CSCANQueue::iterator())
 		{
 		}
 
@@ -17,14 +17,17 @@ namespace iosim
 
 	IOAccess* IOStrategyCSCAN::getNextIOAccessRequest()
 		{
-		if (_currentHead == _queue.end())
+		if (_currentHead == CSCANQueue::iterator() ) // if first time = uninitialized
 			_currentHead = _queue.begin();
 		else if (_currentHead->second.empty())
 			{
 			CSCANQueue::iterator p = _currentHead;
+			/*
 			_currentHead++;
-			if (_currentHead == _queue.end())
+			if (_currentHead == _queue.end())  // if reached end
 				_currentHead = _queue.begin();
+			*/
+			advanceHead();
 
 			_queue.erase(p);
 			}
@@ -38,6 +41,14 @@ namespace iosim
 	unsigned int IOStrategyCSCAN::pendingRequestCount() const
 		{
 		return _pending;
+		}
+
+	void IOStrategyCSCAN::advanceHead()
+		{
+		_currentHead++;
+		if (_currentHead == _queue.end())
+			// if reached end
+			_currentHead = _queue.begin();
 		}
 
 	}
