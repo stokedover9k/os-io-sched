@@ -32,7 +32,7 @@ int main(int argc, char *argv[])
   using namespace std;
 
   OutputToFile::Stream() = stdout;
-  OutFilePrinter::ReportingMode() = SUMMARY|TRACE|INFO|DEBUG;
+  OutFilePrinter::ReportingMode() = SUMMARY;
 
   //------------ parse arguments -------------//
   try { parse_args(argc, argv); }
