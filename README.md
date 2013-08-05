@@ -5,9 +5,8 @@ IO Scheduling lab for Franke's OS course
 
 COMPILE
 ==========================
-To compile the IO Scheduling Simulator, execute the following:
+To compile the IO scheduling simulator, execute the following (assuming that you've already extracted the archive, via e.g. tar -zxvf io-sched.tar.gz) in the directory containing os-io-sched/:
 
-tar -zxvf io-sched.tar.gz
 mkdir build
 cd build
 cmake -D CMAKE_CXX_COMPILER=g++ ../os-io-sched
